@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <!--
  Copyright (c) 2014 ABB Group
  All rights reserved. This program and the accompanying materials
@@ -8,8 +9,7 @@
  Contributors:
  * Vinay Augustine (ABB Group) - initial API, implementation, & documentation
 -->
-
- <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
 	<!-- Configuration
 		 There are three steps to using these targets in an MSBuild file:
 		 
@@ -35,6 +35,7 @@
 		<Revision>0</Revision>
 		<BUILD_NUMBER Condition="'$(BUILD_NUMBER)'==''">0</BUILD_NUMBER>
 		<Version>0.0.0.0</Version>
+		<RootDirectory Condition="'$(RootDirectory)'==''">$(MSBuildStartupDirectory)</RootDirectory>
 		<XmlNamespaces>
 			<Namespace Prefix="v"
 					   Uri="http://schemas.microsoft.com/developer/vsx-schema/2010" />
@@ -74,7 +75,7 @@ using System.Resources%3B
 			Condition="Exists('$(MSBuildCommunityTasksPath)\MSBuild.Community.Tasks.Targets')" />
 	
 	<Target Name="SetVersion">
-		<GitDescribe LocalPath="$(MSBuildProjectDirectory)">
+		<GitDescribe LocalPath="$(RootDirectory)">
 		  <Output TaskParameter="Tag" PropertyName="ReleaseTag" />
 		  <Output TaskParameter="CommitCount" PropertyName="Revision" />
 		  <Output TaskParameter="CommitHash" PropertyName="CommitHash" />

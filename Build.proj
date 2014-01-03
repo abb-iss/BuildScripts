@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <!--
  Copyright (c) 2014 ABB Group
  All rights reserved. This program and the accompanying materials
@@ -8,23 +9,22 @@
  Contributors:
  * Vinay Augustine (ABB Group) - initial API, implementation, & documentation
 -->
-
-<?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0" DefaultTargets="Build">
   <PropertyGroup>
     <MSBuildCommunityTasksPath>$(MSBuildThisFileDirectory)\..\External\MSBuildTasks</MSBuildCommunityTasksPath>
     <SolutionToBuild Condition="'$(SolutionToBuild)'==''"></SolutionToBuild>
-    <SolutionDirectory Condition="'$(SolutionToBuild)'!=''">$([System.IO.Path]::GetDirectoryName($(SolutionToBuild))</SolutionDirectory>
+    <SolutionFullPath Condition="'$(SolutionToBuild)'!=''">$([System.IO.Path]::GetFullPath($(SolutionToBuild)))</SolutionFullPath>
+    <RootDirectory Condition="'$(SolutionFullPath)'!=''">$([System.IO.Path]::GetDirectoryName($(SolutionFullPath)))</RootDirectory>
   </PropertyGroup>
   
   <ItemGroup>
-    <AssemblyInfoFiles Include="$(SolutionDirectory)\SolutionInfo.cs" />
-    <SourceManifests Include="$(SolutionDirectory)\**\source.extension.vsixmanifest" />
+    <AssemblyInfoFiles Include="$(RootDirectory)\SolutionInfo.cs" />
+    <SourceManifests Include="$(RootDirectory)\**\source.extension.vsixmanifest" />
   </ItemGroup>
   
   <Import Project="Version.targets" />
   
   <Target Name="Build" DependsOnTargets="CreateAssemblyInfo;SetVsixVersion">
-    <MSBuild Projects="$(SolutionToBuild)" />
+    <MSBuild Projects="$(SolutionFullPath)" />
   </Target>
 </Project>
