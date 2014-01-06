@@ -43,7 +43,7 @@
 	</PropertyGroup>
 	
 	<Target Name="CreateAssemblyInfo" DependsOnTargets="SetVersion">
-		<WriteLinesToFile File="%(AssemblyInfoFiles.Identity)" Overwrite="true"
+		<WriteLinesToFile File="%(AssemblyInfoFiles.FullPath)" Overwrite="true"
 						  Lines="using System.Reflection%3B
 using System.Resources%3B
 
@@ -61,7 +61,7 @@ using System.Resources%3B
 	</Target>
 	
 	<Target Name="SetVsixVersion" DependsOnTargets="SetVersion">
-		<XmlPoke Namespaces="$(XmlNamespaces)" XmlInputPath="%(SourceManifests.Identity)"
+		<XmlPoke Namespaces="$(XmlNamespaces)" XmlInputPath="%(SourceManifests.FullPath)"
 				 Query="/v:Vsix/v:Identifier/v:Version" Value="$(Version)"/>
 	</Target>
 	
