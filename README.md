@@ -10,7 +10,7 @@ In order to add the scripts to your repository, you should add them as a *[git s
 
 This would look like this:
 
-    git subtree add -f BuildScripts https://github.com/abb-iss/BuildScripts.git
+    git remote add -f BuildScripts https://github.com/abb-iss/BuildScripts.git
     git subtree add --prefix External\BuildScripts BuildScripts master --squash
 
 If you later need to update the build scripts, you can do it like this:
