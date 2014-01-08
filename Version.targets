@@ -37,6 +37,8 @@
 		<Version>$(ReleaseTag).0.0</Version>
 		<RootDirectory Condition="'$(RootDirectory)'==''">$(MSBuildStartupDirectory)</RootDirectory>
 		<XmlNamespaces>
+			<Namespace Prefix="nuget"
+			           Uri="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd" />
 			<Namespace Prefix="v"
 					   Uri="http://schemas.microsoft.com/developer/vsx-schema/2010" />
 		</XmlNamespaces>
@@ -58,6 +60,11 @@ using System.Resources%3B
 [assembly: AssemblyConfiguration(&quot;Release&quot;)]
 [assembly: AssemblyInformationalVersion(&quot;$(Version)-Release-$(CommitHash)&quot;)]
 #endif" />
+	</Target>
+	
+	<Target Name="SetNuspecVersion" DependsOnTargets="SetVersion">
+		<XmlPoke Namespaces="$(XmlNamespaces)" XmlInputPath="%(NuspecFiles.FullPath)"
+		         Query="/nuget:package/nuget:metadata/nuget:version" Value="$(Version)" />
 	</Target>
 	
 	<Target Name="SetVsixVersion" DependsOnTargets="SetVersion">
