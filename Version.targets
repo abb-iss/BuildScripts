@@ -66,9 +66,7 @@ using System.Resources%3B
 	</Target>
 	
 	<Target Name="PrintVersion" DependsOnTargets="SetVersion">
-		<Message Text="Version: $(Version)" />
-		<Message Text="Configuration: $(Configuration)" />
-		<Message Text="Commit: $(CommitHash)" />
+		<Message Text="$(Version)" />
 	</Target>
   
 	<Import Project="$(MSBuildCommunityTasksPath)\MSBuild.Community.Tasks.Targets"
