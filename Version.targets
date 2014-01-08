@@ -31,10 +31,10 @@
 	</PropertyGroup>
 	
 	<PropertyGroup>
-		<ReleaseTag>0.0</ReleaseTag>
+		<ReleaseTag>99.99</ReleaseTag>
 		<Revision>0</Revision>
 		<BUILD_NUMBER Condition="'$(BUILD_NUMBER)'==''">0</BUILD_NUMBER>
-		<Version>0.0.0.0</Version>
+		<Version>$(ReleaseTag).0.0</Version>
 		<RootDirectory Condition="'$(RootDirectory)'==''">$(MSBuildStartupDirectory)</RootDirectory>
 		<XmlNamespaces>
 			<Namespace Prefix="v"
